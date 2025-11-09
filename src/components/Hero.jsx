@@ -1,24 +1,60 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import useDarkMode from "@/hooks/useDarkMode";
 import RevealOnScroll from "@/components/common/RevealOnScroll";
 import { FaRegSun, FaRegMoon } from "react-icons/fa";
-import { FaHome, FaUser, FaCode, FaTools, FaEnvelope, FaBars, FaTimes, FaSignOutAlt } from "react-icons/fa";
+import { FaHome, FaUser, FaCode, FaBars, FaTimes, FaSignOutAlt } from "react-icons/fa";
+import useSound from 'use-sound';
 
 function Hero() {
   const [darkMode, setDarkMode] = useDarkMode();
   const [showButton, setShowButton] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-
+  const [totalPlayed, setTotalPlayed] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false);
 
   const menuItems = [
     { label: "Inicio", href: "#hero", icon: <FaHome /> },
-     { label: "Proyectos", href: "#projects", icon: <FaCode /> },
     { label: "Sobre mí", href: "#about", icon: <FaUser /> },
+    { label: "Proyectos", href: "#projects", icon: <FaCode /> },
     { label: "Salir", href: "#contact", icon: <FaSignOutAlt /> },
   ];
+  const [splashVisible, setSplashVisible] = useState(true);
+  const handleStart = () => {
+    playItemChange();
+    setSplashVisible(false);
+    stopItemChange();
+  };
 
+  useEffect(() => {
+    if (!splashVisible) return;
+
+    const handleKeyStart = () => {
+      handleStart();
+    };
+
+    window.addEventListener("keydown", handleKeyStart);
+    return () => window.removeEventListener("keydown", handleKeyStart);
+  }, [splashVisible]);
+
+  // Initialize time from localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem("totalPlayed")
+    setTotalPlayed(stored ? JSON.parse(stored) : 1)
+  }, [])
+
+
+  // Update time every second
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTotalPlayed((prev) => {
+        const newTime = prev + 1
+        localStorage.setItem("totalPlayed", JSON.stringify(newTime))
+        return newTime
+      })
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [])
 
   // Detectar dirección del scroll
   useEffect(() => {
@@ -40,6 +76,43 @@ function Hero() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  const [playItemChange, { stopItemChange }] = useSound('https://www.dropbox.com/s/fiyx4q2mdwynraj/FF7CursorMove.mp3?raw=1');
+  const [playItemSelected, { stopItemSelected }] = useSound('https://www.dropbox.com/s/v04ewrevpnnsz03/FF7CursorSaveLoad.mp3?raw=1');
+
+  function formatTime(seconds) {
+    if (seconds >= 360000) {
+      return "99:99:99"
+    }
+    const hh = Math.floor(seconds / 3600)
+    const mm = Math.floor((seconds % 3600) / 60)
+    const ss = seconds % 60
+    return `${hh}:${String(mm).padStart(2, "0")}:${String(ss).padStart(2, "0")}`
+  }
+
+  function formatGil(gil) {
+    return gil.toLocaleString()
+  }
+
+
+  if (splashVisible) {
+    return (
+      <AnimatePresence>
+        {splashVisible && (
+          <motion.div
+            initial={false}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7, ease: "easeInOut" }}
+            className="fixed inset-0 flex flex-col items-center justify-center bg-black text-white 
+          text-3xl select-none cursor-pointer z-[9999]"
+            onClick={handleStart}
+          >
+            <p className="animate-pulse">Presiona cualquier botón para iniciar</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    );
+  }
   return (
     <section
       id="hero"
@@ -50,7 +123,7 @@ function Hero() {
     >
       {/* Botón modo oscuro */}
       <motion.button
-        onClick={() => setDarkMode(!darkMode)}
+        onClick={() => { setDarkMode(!darkMode); playItemSelected(); }}
         initial={{ opacity: 0, y: -20 }}
         animate={{
           opacity: showButton ? 1 : 0,
@@ -73,6 +146,38 @@ function Hero() {
         {darkMode ? <FaRegSun className="text-cyan-900 text-3xl" /> : <FaRegMoon className="text-white text-3xl" />}
       </motion.button>
 
+      {/* Estadísticas estilo FFVII */}
+      {/* Estadísticas estilo FFVII */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{
+          opacity: showButton ? 1 : 0,
+          y: showButton ? 0 : -10,
+        }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
+        className="
+        time-ff7 
+            fixed 
+            right-4
+            top-48 md:top-28
+            text-right
+            text-cyan-900 dark:text-gray-200
+            font-medium 
+            text-sm md:text-lg
+            space-y-1
+            z-50
+            select-none
+            pointer-events-none
+          "
+      >
+        <div>
+          Time: <span className="tracking-wider">{formatTime(totalPlayed)}</span>
+        </div>
+        <div>
+          Guiles: <span className="tracking-wider">{formatGil(777)}G</span>
+        </div>
+      </motion.div>
+
       <div className="grid grid-cols-2 md:grid-cols-2 gap-6 w-full">
         {/* === Menú lateral estilo FFVII === */}
         <nav className="hidden md:flex flex-col items-start justify-center pl-10 md:pl-40 gap-4 text-left md:mt-20 md:col-span-1">
@@ -85,6 +190,8 @@ function Hero() {
               transition={{ delay: index * 0.15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.3 }}
+              onMouseEnter={() => playItemChange()} onMouseLeave={() => stopItemChange()}
+              onClick={() => { playItemSelected(); }}
               className="
                 group relative text-lg md:text-3xl font-medium 
                 text-cyan-800 dark:text-gray-200 

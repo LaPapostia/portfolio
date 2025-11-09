@@ -5,3 +5,12 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Defining styles for the time component */
+.time-ff7 {
+  border: 0.2em solid;
+  border-radius: 0.5em;
+  box-sizing: border-box;
+  padding: 0.3em;
+  line-height: 1.3em;
+}

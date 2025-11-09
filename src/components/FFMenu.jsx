@@ -105,9 +105,9 @@ export default function FF7Menu() {
           <audio ref={moveAudioRef} src="https://www.dropbox.com/s/fiyx4q2mdwynraj/FF7CursorMove.mp3?raw=1" />
           <audio ref={loadAudioRef} src="https://www.dropbox.com/s/v04ewrevpnnsz03/FF7CursorSaveLoad.mp3?raw=1" />
 
-          <audio controls autoPlay loop >
+          {/* <audio controls autoPlay loop >
             <source src={gameData.musicUrl} type="audio/mp3" />
-          </audio>
+          </audio> */}
 
           <button
             className={`ff7-cursor left `}
@@ -127,7 +127,6 @@ export default function FF7Menu() {
 
         </div>
 
-        <div className="ff7-info-panel ">
           <div className={`ff7-time bg-gradient-to-b from-cyan-700 to-black`}>
             <div>
               Time <span className="time-value">{formatTime(totalPlayed)}</span>
@@ -136,7 +135,6 @@ export default function FF7Menu() {
               Gil <span className="gil-value">{formatGil(gameData.gil)}</span>
             </div>
           </div>
-        </div>
 
       </div>
     </div>

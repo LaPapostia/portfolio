@@ -17,15 +17,17 @@ const About = () => {
                 transition={{ duration: 0.8 }}
                 className="max-w-3xl mx-auto"
             >
-                <h2 className="text-4xl font-bold mb-4 text-cyan-900 dark:text-white">
+                <h2 className="text-4xl font-bold mb-6 text-cyan-900 dark:text-white">
                     Sobre mí
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
-                    Soy <span className="font-semibold text-cyan-700">Juanes Sepúlveda</span>,
-                    un desarrollador <span className="text-cyan-700">Full Stack</span> apasionado por
+                <p className="text-gray-700 dark:text-gray-300 text-lg ">
+                    Hola, me alegra que estés aquí, <br />
+                    Me llamo <span className="font-bold text-cyan-700">Juanes Sepúlveda</span>,
+                    trabajo como desarrollador <span className="text-cyan-700 font-bold">Full Stack</span> apasionado por
                     crear soluciones tecnológicas que combinen funcionalidad, rendimiento y una excelente
-                    experiencia de usuario. Disfruto construir interfaces modernas y optimizar procesos
-                    backend con las mejores prácticas.
+                    experiencia de usuario. <br />
+                    Disfruto de proveer soluciones innovadoras y eficientes que impulsen el éxito de los proyectos en 
+                    los que participo.
                 </p>
 
                 {/* Animación de íconos */}
