@@ -11,7 +11,7 @@ export default function ProjectCard({ project, index }) {
       style={{ transformOrigin: "center" }}
       viewport={{ once: true }}
       className="relative overflow-hidden shadow-lg group
-      w-200 h-[25em] md:h-[40em] cursor-pointer bg-black/20 backdrop-blur-sm"
+      w-200 h-[25em] md:h-[40em] cursor-pointer"
     >
       <img
         src={project.image}
@@ -20,7 +20,7 @@ export default function ProjectCard({ project, index }) {
         transition-transform duration-700 group-hover:scale-110"
       />
 
-      <div className="absolute top-3 left-3 flex gap-2 bg-black/40 backdrop-blur-sm p-2 rounded-lg">
+      <div className="absolute top-3 right-3 flex flex-col gap-2 bg-black/40 backdrop-blur-sm p-2 rounded-lg">
         {project.tech.map((icon, i) => (
           <motion.div
             key={i}
