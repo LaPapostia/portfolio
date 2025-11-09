@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import useDarkMode from "@/hooks/useDarkMode";
 import RevealOnScroll from "@/components/common/RevealOnScroll";
 import { FaRegSun, FaRegMoon } from "react-icons/fa";
@@ -12,20 +12,23 @@ function Hero() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [totalPlayed, setTotalPlayed] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false);
+  const [splashVisible, setSplashVisible] = useState(true);
 
+  // Menu items
   const menuItems = [
     { label: "Inicio", href: "#hero", icon: <FaHome /> },
     { label: "Sobre mí", href: "#about", icon: <FaUser /> },
     { label: "Proyectos", href: "#projects", icon: <FaCode /> },
     { label: "Salir", href: "#contact", icon: <FaSignOutAlt /> },
   ];
-  const [splashVisible, setSplashVisible] = useState(true);
+
+  // Handle start from splash screen
   const handleStart = () => {
     playItemChange();
     setSplashVisible(false);
-    stopItemChange();
   };
 
+  // Start game on any key press
   useEffect(() => {
     if (!splashVisible) return;
 
@@ -43,7 +46,6 @@ function Hero() {
     setTotalPlayed(stored ? JSON.parse(stored) : 1)
   }, [])
 
-
   // Update time every second
   useEffect(() => {
     const timer = setInterval(() => {
@@ -56,16 +58,14 @@ function Hero() {
     return () => clearInterval(timer)
   }, [])
 
-  // Detectar dirección del scroll
+  // Detect scroll direction
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY < lastScrollY) {
-        // Scroll hacia arriba → mostrar
         setShowButton(true);
       } else {
-        // Scroll hacia abajo → ocultar
         setShowButton(false);
       }
 
@@ -147,7 +147,6 @@ function Hero() {
       </motion.button>
 
       {/* Estadísticas estilo FFVII */}
-      {/* Estadísticas estilo FFVII */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{
@@ -161,7 +160,8 @@ function Hero() {
             right-4
             top-48 md:top-28
             text-right
-            text-cyan-900 dark:text-gray-200
+            dark:text-cyan-900 text-white
+            bg-cyan-900 dark:bg-white 
             font-medium 
             text-sm md:text-lg
             space-y-1
@@ -241,23 +241,23 @@ function Hero() {
         </div>
 
         {/* === Navbar superior (mobile) === */}
-        <div className="md:hidden absolute top-4 left-4 right-4 flex justify-between items-center z-50">
+        <div className=" fixed md:hidden absolute top-4 left-4 right-4 flex justify-between items-center z-50 bg-cyan-800 dark:bg-white h-10 rounded-full px-4">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="text-cyan-700 dark:text-cyan-400 text-2xl focus:outline-none"
+            className="text-white dark:text-cyan-800 text-2xl focus:outline-none"
           >
             {menuOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
 
         {/* Menú móvil desplegable */}
-        <AnimatePresence className="md:hidden">
+        <AnimatePresence className="md:hidden ">
           {menuOpen && (
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="absolute top-14 left-0 right-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md py-4 z-40 shadow-lg md:hidden"
+              className="fixed top-14 left-0 right-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md py-4 z-40 shadow-lg md:hidden"
             >
               <div className="flex flex-col items-center gap-4 md:hidden">
                 {menuItems.map((item, index) => (

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   FaReact,
@@ -10,78 +9,134 @@ import {
 } from "react-icons/fa";
 import { SiDotnet, SiTypescript } from "react-icons/si";
 import { VscAzureDevops } from "react-icons/vsc";
+import { useState, useEffect } from "react";
+import ProjectCard from "@/components/common/ProjectCard";
+import useSound from 'use-sound';
 
-const skills = [
-  { name: ".NET", icon: <SiDotnet />, level: 95 },
-  { name: "React", icon: <FaReact />, level: 90 },
-  { name: "Node.js", icon: <FaNodeJs />, level: 85 },
-  { name: "TypeScript", icon: <SiTypescript />, level: 80 },
-  { name: "Python", icon: <FaPython />, level: 75 },
-  { name: "SQL/DB", icon: <FaDatabase />, level: 85 },
-  { name: "Azure - Azure DevOps", icon: <VscAzureDevops />, level: 60 },
-  { name: "GitHub - Github Actions", icon: <FaGithub />, level: 80 },
-];
 
-const projects = [
+function ProjectsMenu() {
 
-  {
-    principal: false,
-    title: "Geocontrol",
-    description:
-      "Aplicativo para la gestión y monitoreo de rutas vehiculares en tiempo real.",
-    image: "/images/cloud.png",
-    link: "#",
-    github: "#",
-    skills: ["Node.js", "React", "TypeScript", ".NET", "SQL/DB"],
-    tech: [
-      <FaNodeJs className="text-cyan-400" />,
-      <FaReact className="text-cyan-400" />,
-      <SiTypescript className="text-cyan-400" />,
-      <SiDotnet className="text-cyan-400" />,
-      <FaDatabase className="text-cyan-400" />,
-      <FaGithub className="text-cyan-400" />,
-    ],
-  },
-  {
-    principal: false,
-    title: "App de Reportes",
-    description:
-      "ETL y visualización de datos para reportes ejecutivos de KPIs comerciales.",
-    image: "/images/cloud.png",
-    link: "#",
-    github: "#",
-    skills: ["Python", "Azure DevOps", "SQL/DB"],
-    tech: [
-      <FaPython className="text-cyan-400" />,
-      <VscAzureDevops className="text-cyan-400" />,
-      <FaDatabase className="text-cyan-400" />,
-      <FaGithub className="text-cyan-400" />,
-    ],
-  },
-  {
-    principal: true,
-    title: "Sistema de Facturación e Inventarios",
-    description:
-      "Gestión completa de facturación y control de inventarios para canales distribuidos de venta, con integraciones en la nube y ciclo CI/CD.",
-    image: "/images/cloud.png",
-    link: "#",
-    github: "#",
-    skills: [".NET", "SQL/DB", "Azure DevOps"],
-    tech: [
-      <SiDotnet className="text-cyan-400" />,
-      <FaDatabase className="text-cyan-400" />,
-      <VscAzureDevops className="text-cyan-400" />,
-      <FaGithub className="text-cyan-400" />,
-    ],
-  },
-];
-
-export default function ProjectsMenu() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState(null);
+
+  const [showButton, setShowButton] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const skills = [
+    { name: ".NET", icon: <SiDotnet />, level: 95 },
+    { name: "React", icon: <FaReact />, level: 90 },
+    { name: "Node.js", icon: <FaNodeJs />, level: 85 },
+    { name: "TypeScript", icon: <SiTypescript />, level: 80 },
+    { name: "Python", icon: <FaPython />, level: 75 },
+    { name: "SQL/DB", icon: <FaDatabase />, level: 85 },
+    { name: "Azure - Azure DevOps", icon: <VscAzureDevops />, level: 60 },
+    { name: "GitHub - Github Actions", icon: <FaGithub />, level: 80 },
+  ];
+
+  const projects = [
+
+    {
+      principal: false,
+      title: "Geocontrol",
+      description:
+        "Aplicativo para la gestión y monitoreo de rutas vehiculares en tiempo real.",
+      image: "/images/cloud.png",
+      link: "#",
+      github: "#",
+      skills: ["Node.js", "React", "TypeScript", ".NET", "SQL/DB", "GitHub - Github Actions"],
+      tech: [
+        <FaNodeJs className="text-cyan-400" />,
+        <FaReact className="text-cyan-400" />,
+        <SiTypescript className="text-cyan-400" />,
+        <SiDotnet className="text-cyan-400" />,
+        <FaDatabase className="text-cyan-400" />,
+        <FaGithub className="text-cyan-400" />,
+      ],
+    },
+    {
+      principal: false,
+      title: "App de Reportes",
+      description:
+        "ETL y visualización de datos para reportes ejecutivos de KPIs comerciales.",
+      image: "/images/cloud.png",
+      link: "#",
+      github: "#",
+      skills: ["Python", "Azure DevOps", "SQL/DB", "GitHub - Github Actions"],
+      tech: [
+        <FaPython className="text-cyan-400" />,
+        <VscAzureDevops className="text-cyan-400" />,
+        <FaDatabase className="text-cyan-400" />,
+        <FaGithub className="text-cyan-400" />,
+      ],
+    },
+    {
+      principal: true,
+      title: "Sistema de Facturación e Inventarios",
+      description:
+        "Gestión completa de facturación y control de inventarios para canales distribuidos de venta, con integraciones en la nube y ciclo CI/CD.",
+      image: "/images/cloud.png",
+      link: "#",
+      github: "#",
+      skills: [".NET", "SQL/DB", "Azure - Azure DevOps", "GitHub - Github Actions"],
+      tech: [
+        <SiDotnet className="text-cyan-400" />,
+        <FaDatabase className="text-cyan-400" />,
+        <VscAzureDevops className="text-cyan-400" />,
+        <FaGithub className="text-cyan-400" />,
+      ],
+    }, {
+      principal: true,
+      title: "TEST PROJECT",
+      description:
+        "TESSSSSSSSSSSSSSSSSST",
+      image: "/images/cloud.png",
+      link: "#",
+      github: "#",
+      skills: [".NET", "SQL/DB", "Azure - Azure DevOps", "GitHub - Github Actions"],
+      tech: [
+        <SiDotnet className="text-cyan-400" />,
+      ],
+    },
+  ];
+
+  // Detect scroll direction
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < lastScrollY && !isMenuOpen) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
 
   const filteredProjects = selectedSkill
     ? projects.filter((p) => p.skills.includes(selectedSkill))
     : projects;
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const maxVisible = 3; // máximo proyectos visibles a la vez
+  const total = filteredProjects.length;
+  const canSlide = total > maxVisible;
+
+  const next = () => {
+    if (canSlide) setCurrentIndex((prev) => Math.min(prev + 1, total - maxVisible));
+  };
+
+  const prev = () => {
+    if (canSlide) setCurrentIndex((prev) => Math.max(prev - 1, 0));
+  };
+
+  const [playItemChange, { stopItemChange }] = useSound('https://www.dropbox.com/s/fiyx4q2mdwynraj/FF7CursorMove.mp3?raw=1');
 
   return (
     <section
@@ -89,145 +144,149 @@ export default function ProjectsMenu() {
       bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 
 	  transition-colors duration-700 text-white px-6 py-40"
     >
-      <div className="grid grid-cols-4 w-full items-start" id="projects">
 
+      {/* Botón Menu Habilidades*/}
+      <motion.button
+        onClick={() => { setIsMenuOpen(!isMenuOpen); setShowButton(false); }}
+        animate={{ opacity: showButton ? 1 : 0, y: showButton ? 0 : -10 }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
+        className="
+          fixed left-4 bottom-6            
+          md:top-20 md:left-4 md:bottom-auto  
 
-        {/* === Menú lateral estilo FFVII === */}
-        <aside className="col-span-1 border-r border-cyan-800 md:sticky md:top-20 py-5 md:py-16">
-          
-          <div className="grid grid-cols-4 ">
-            
-            <div className="col-span-1 border border-cyan-800 p-4 ">
-              {/* Título vertical */}
-              <h1 class="text-3xl font-bold text-cyan-900 dark:text-white pr-4 transform -rotate-270 origin-top-right">
-                Habilidades
-              </h1>
-            </div>
+          bg-cyan-900 dark:bg-white 
+          px-4 py-2 rounded-full shadow 
+          hover:scale-105
+          transition-transform duration-300
+          z-50
+          text-white dark:text-black cursor-pointer
+        "
+      >
+        {isMenuOpen ? "Cerrar" : "Habilidades"}
+      </motion.button>
+      <div className="relative w-full h-screen overflow-hidden" id="projects">
 
-            <div className="col-span-3 pr-8">
-              {/* Lista de skills */}
-              <ul className="w-full ">
-                {skills.map((skill, index) => (
-                  <motion.li
-                    key={index}
-                    whileHover={{ scale: 1.05, x: 5 }}
-                    onClick={() =>
-                      setSelectedSkill(
-                        selectedSkill === skill.name ? null : skill.name
-                      )
+        {/* === Menú lateral  === */}
+        <motion.aside
+          initial={{ x: -260 }}
+          animate={{ x: isMenuOpen ? 0 : -260 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+          className="
+      fixed top-0 left-0 h-full w-64 z-40
+      bg-gray-900 border-r border-cyan-800
+      overflow-y-auto
+    "
+        >
+          <div className="p-6 space-y-6">
+
+            <h1 className="text-2xl font-bold text-cyan-400 mt-10">
+              Habilidades
+            </h1>
+
+            <ul className="space-y-2">
+              {skills.map((skill, index) => (
+                <motion.li
+                  key={index}
+                  whileHover={{ scale: 1.05, x: 6 }}
+                  onClick={() =>
+                    setSelectedSkill(selectedSkill === skill.name ? null : skill.name)
+                  }
+                  className={`flex items-center gap-3 p-3 w-full border-b border-cyan-800 cursor-pointer transition-all duration-300
+              ${selectedSkill === skill.name
+                      ? "bg-cyan-800 text-white border-l-4 border-cyan-400"
+                      : "text-gray-300 hover:bg-cyan-600 hover:text-white"
                     }
-                    className={`flex items-center gap-3 p-3 cursor-pointer transition-all duration-300  border-b border-cyan-800 w-full
-                        ${selectedSkill === skill.name
-                        ? "bg-cyan-800 border-l-4 border-cyan-400 text-white dark:text-cyan-400"
-                        : "hover:bg-cyan-600 hover:text-white text-gray-600 dark:text-gray-200"
-                      }`}
-                  >
-                    <div className="text-cyan-400 text-xl">{skill.icon}</div>
-                    <div className="flex-1">
-                      <div className="flex justify-between">
-                        <span className="text-sm font-medium">{skill.name}</span>
-                        <span className="text-xs">{skill.level}%</span>
-                      </div>
-                      <div className="w-full bg-gray-700/50 h-1.5 rounded-full mt-1">
-                        <motion.div
-                          className="bg-cyan-500 h-1.5 rounded-full"
-                          initial={{ width: 0 }}
-                          animate={{ width: `${skill.level}%` }}
-                          transition={{ duration: 1 }}
-                        />
-                      </div>
+            `}
+                >
+                  <div className="text-cyan-400 text-xl">{skill.icon}</div>
+                  <div className="flex-1">
+                    <div className="flex justify-between text-sm font-medium">
+                      <span>{skill.name}</span>
+                      <span>{skill.level}%</span>
                     </div>
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
+                    <div className="w-full bg-gray-700/50 h-1.5 rounded-full mt-1">
+                      <motion.div
+                        className="bg-cyan-500 h-1.5 rounded-full"
+                        initial={{ width: 0 }}
+                        animate={{ width: `${skill.level}%` }}
+                        transition={{ duration: 1 }}
+                      />
+                    </div>
+                  </div>
+                </motion.li>
+              ))}
+
+              <button
+                onClick={() => { setIsMenuOpen(false); }}
+                className="mt-6 w-full bg-cyan-800 hover:bg-cyan-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 cursor-pointer "
+              >
+                Cerrar
+              </button>
+            </ul>
+
           </div>
+        </motion.aside>
 
-        </aside>
+        {/* === Carrusel pantalla completa === */}
+        <div className="flex items-center justify-center w-full h-full px-2">
+          <div className="w-full text-center">
 
-
-        {/* === Proyectos (lado derecho) === */}
-        <div className="flex-1 px-4 py-5 md:py-16 md:col-span-3">
-          <div className="max-w-5xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-cyan-800 dark:text-white mb-12">
+            <h2 className="text-3xl font-bold text-cyan-800 dark:text-white mb-2">
               {selectedSkill ? `Proyectos con ${selectedSkill}` : "Proyectos Destacados"}
             </h2>
+            <h3 className="text-1xl  text-cyan-800 dark:text-white mb-12">
+              (Filtra por habilidad usando el boton de Habilidades)
+            </h3>
 
-            <div className="grid grid-cols-2 gap-6 justify-items-center">
-              {filteredProjects.map((project, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  viewport={{ once: true }}
-                  className={`relative overflow-hidden rounded-xl shadow-lg group
-          w-full max-w-[500px] min-h-[220px] sm:min-h-[250px] md:min-h-[280px]
-          cursor-pointer ${project.principal ? "md:col-span-2 max-w-full" : ""}
-        `}
+            {/* Desktop Carrusel */}
+            <div className="md:flex items-center gap-2 relative justify-center w-full h-[70vh]">
+
+              {canSlide && (
+                <button
+                  onClick={() => { prev(); playItemChange(); }}
+                  className="px-4 py-16 bg-cyan-700/80 hover:bg-cyan-600 text-white rounded-2xl shadow-lg transition-all cursor-pointer"
                 >
-                  {/* Imagen */}
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="absolute inset-0 w-full h-full object-cover object-center 
-            transition-transform duration-700 group-hover:scale-110"
-                  />
+                  ‹
+                </button>
+              )}
 
-                  {/* Íconos del stack */}
-                  <div className="absolute top-3 left-3 flex gap-2 bg-black/40 backdrop-blur-sm p-2 rounded-lg opacity-90">
-                    {project.tech.map((icon, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: i * 0.1 }}
-                        viewport={{ once: true }}
-                        className="text-xl text-cyan-400 hover:text-white transition-colors duration-300"
-                      >
-                        {icon}
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* Overlay animado */}
-                  <div
-                    className="absolute inset-0 bg-gradient-to-t 
-              from-cyan-900/90 to-transparent 
-              dark:from-cyan-900/90 dark:to-transparent
-              opacity-0 group-hover:opacity-100 transition-opacity 
-              duration-700 flex flex-col justify-end p-5"
-                  >
-                    <h3 className="text-xl font-semibold mb-1 text-left">{project.title}</h3>
-                    <p className="text-gray-300 mb-3 text-sm line-clamp-3 text-left">
-                      {project.description}
-                    </p>
-                    <div className="flex gap-4">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        className="text-gray-300 hover:text-white text-lg"
-                      >
-                        <FaGithub />
-                      </a>
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        className="text-gray-300 hover:text-white text-lg"
-                      >
-                        <FaExternalLinkAlt />
-                      </a>
+              <div className="overflow-hidden w-200 h-full transition-all duration-500">
+                <div
+                  className="flex transition-transform duration-500 h-full"
+                  style={{ transform: `translateX(-${currentIndex * (100 / maxVisible)}%)` }}
+                >
+                  {filteredProjects.map((project, index) => (
+                    <div key={index} className="w-1/3 flex-shrink-0 flex justify-center h-full">
+                      <ProjectCard project={project} index={index} fullHeight />
                     </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
+                  ))}
+                </div>
+              </div>
 
+              {canSlide && (
+                <button
+                  onClick={() => { next(); playItemChange(); }}
+              className="px-4 py-16 bg-cyan-700/80 hover:bg-cyan-600 text-white rounded-2xl shadow-lg transition-all cursor-pointer"
+                >
+              ›
+            </button>
+              )}
+          </div>
+
+          {/* Mobile: grid normal */}
+          <div className="grid grid-cols-1 gap-6 justify-items-center md:hidden">
+            {filteredProjects.map((project, index) => (
+              <ProjectCard key={index} project={project} index={index} />
+            ))}
+          </div>
+
+        </div>
       </div>
 
+    </div>
 
-    </section>
+    </section >
   );
 }
+
+export default ProjectsMenu;

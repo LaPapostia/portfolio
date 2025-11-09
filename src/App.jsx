@@ -13,8 +13,8 @@ function App() {
       <About />
       <hr className="border-t border-gray-900 dark:border-gray-700 mx-auto w-4/5 opacity-50" />
 
-      <FF7Menu />
-      <hr className="border-t border-gray-900 dark:border-gray-700 mx-auto w-4/5 opacity-50" />
+      {/* <FF7Menu />
+      <hr className="border-t border-gray-900 dark:border-gray-700 mx-auto w-4/5 opacity-50" /> */}
 
       <Projects />
       <hr className="border-t border-gray-900 dark:border-gray-700 mx-auto w-4/5 opacity-50" />
