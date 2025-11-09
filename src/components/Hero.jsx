@@ -1,0 +1,192 @@
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import useDarkMode from "@/hooks/useDarkMode";
+import RevealOnScroll from "@/components/common/RevealOnScroll";
+import { FaRegSun, FaRegMoon } from "react-icons/fa";
+import { FaHome, FaUser, FaCode, FaTools, FaEnvelope, FaBars, FaTimes, FaSignOutAlt } from "react-icons/fa";
+
+function Hero() {
+  const [darkMode, setDarkMode] = useDarkMode();
+  const [showButton, setShowButton] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const menuItems = [
+    { label: "Inicio", href: "#hero", icon: <FaHome /> },
+     { label: "Proyectos", href: "#projects", icon: <FaCode /> },
+    { label: "Sobre mí", href: "#about", icon: <FaUser /> },
+    { label: "Salir", href: "#contact", icon: <FaSignOutAlt /> },
+  ];
+
+
+  // Detectar dirección del scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < lastScrollY) {
+        // Scroll hacia arriba → mostrar
+        setShowButton(true);
+      } else {
+        // Scroll hacia abajo → ocultar
+        setShowButton(false);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+  return (
+    <section
+      id="hero"
+      className="flex flex-col items-center justify-center text-center min-h-screen 
+      bg-gradient-to-r from-gray-50 to-gray-300
+      dark:bg-gradient-to-r dark:from-gray-900  dark:to-gray-600 
+      px-6 transition-colors duration-700"
+    >
+      {/* Botón modo oscuro */}
+      <motion.button
+        onClick={() => setDarkMode(!darkMode)}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{
+          opacity: showButton ? 1 : 0,
+          y: showButton ? 0 : -20,
+        }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
+        className="
+          fixed 
+          right-4 
+          top-30 md:top-12
+          bg-cyan-900 dark:bg-white 
+          p-2 rounded-full shadow 
+          hover:scale-105 
+          transition-transform duration-300
+          z-50
+          cursor-pointer
+        "
+        aria-label="Cambiar modo oscuro"
+      >
+        {darkMode ? <FaRegSun className="text-cyan-900 text-3xl" /> : <FaRegMoon className="text-white text-3xl" />}
+      </motion.button>
+
+      <div className="grid grid-cols-2 md:grid-cols-2 gap-6 w-full">
+        {/* === Menú lateral estilo FFVII === */}
+        <nav className="hidden md:flex flex-col items-start justify-center pl-10 md:pl-40 gap-4 text-left md:mt-20 md:col-span-1">
+          {menuItems.map((item, index) => (
+            <motion.a
+              key={item.label}
+              href={item.href}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              className="
+                group relative text-lg md:text-3xl font-medium 
+                text-cyan-800 dark:text-gray-200 
+                hover:text-cyan-600 dark:hover:text-cyan-600
+                flex items-center gap-3 py-1
+              "
+            >
+              {/* Ícono animado: aparece en hover con destello */}
+              <motion.span
+                className="absolute -left-10 text-cyan-600 text-2xl scale-x-0 
+                  group-hover:scale-x-100 transition-transform duration-300 shadow-[0_0_1px_#22d3ee]">
+                {item.icon}
+              </motion.span>
+
+              {/* Texto del ítem */}
+              <span className="z-10">{item.label}</span>
+
+              {/* Línea de energía azul animada */}
+              <motion.div
+                className="ml-2 h-[1px] bg-cyan-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 w-8 shadow-[0_0_10px_#22d3ee]"
+              />
+            </motion.a>
+          ))}
+        </nav>
+
+        {/* === Presentación derecha === */}
+        <div className="text-center md:pr-10 top-1 col-span-2 md:mt-20 md:col-span-1">
+          <RevealOnScroll
+            once={false}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl md:text-7xl font-extrabold text-cyan-800 dark:text-white"
+          >
+            Juanes Sepúlveda
+          </RevealOnScroll>
+
+          <RevealOnScroll
+            once={false}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="text-2xl md:text-3xl font-light text-cyan-800 dark:text-gray-300 mt-3"
+          >
+            Full Stack Developer
+          </RevealOnScroll>
+        </div>
+
+        {/* === Navbar superior (mobile) === */}
+        <div className="md:hidden absolute top-4 left-4 right-4 flex justify-between items-center z-50">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="text-cyan-700 dark:text-cyan-400 text-2xl focus:outline-none"
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
+
+        {/* Menú móvil desplegable */}
+        <AnimatePresence className="md:hidden">
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="absolute top-14 left-0 right-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md py-4 z-40 shadow-lg md:hidden"
+            >
+              <div className="flex flex-col items-center gap-4 md:hidden">
+                {menuItems.map((item, index) => (
+                  <motion.a
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-center gap-3 text-gray-800 dark:text-gray-200 text-lg font-medium hover:text-cyan-600"
+                  >
+                    {item.icon}   {item.label}
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Indicador de scroll */}
+      <RevealOnScroll
+        once={true}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+        className="absolute bottom-8 flex flex-col items-center"
+      >
+        <span className="text-xs text-gray-600 dark:text-gray-400 mb-2">
+          Desliza hacia abajo
+        </span>
+        <div className="w-1 h-3 bg-gray-600 dark:bg-gray-400 rounded-full animate-bounce"></div>
+      </RevealOnScroll>
+    </section>
+  );
+}
+
+export default Hero;

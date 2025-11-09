@@ -1,0 +1,3 @@
+npm install tailwindcss @tailwindcss/vite
+npm install -D postcss autoprefixer
+npm install framer-motion react-router-dom react-i18next i18next

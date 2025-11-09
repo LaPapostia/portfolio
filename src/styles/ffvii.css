@@ -1,0 +1,604 @@
+.ff7-container {
+  width: 100%;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.ff7-group {
+  position: relative;
+  text-align: left;
+  color: white;
+  padding: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.ff7-group.hide-extras .hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Header */
+.ff7-header {
+  font-size: 29px;
+  animation: appearing 1s linear 1s forwards;
+  opacity: 0;
+}
+
+.ff7-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.ff7-subtitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+}
+
+/* Main Content */
+.ff7-main-content {
+  display: flex;
+  gap: 30px;
+  position: relative;
+  margin: 35px 0;
+}
+
+.ff7-section {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 800px;
+  height: 750px;
+  padding: 27px 0 0 60px;
+  border: 5px solid;
+  border-radius: 15px;
+  box-sizing: border-box;
+  animation: movingLeft 0.5s ease;
+  z-index: 0;
+}
+
+/* Character Card */
+.ff7-character {
+  position: relative;
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+
+.character-photo-container {
+  width: 187.5px;
+  height: 145px;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.character-photo {
+  display: block;
+  transition: margin-left 0.3s ease;
+}
+
+.character-photo.behind {
+  margin-left: 62.5px;
+}
+
+/* Stats Table */
+.character-stats-table {
+  line-height: 30px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 14px;
+}
+
+.character-stats-table td {
+  padding: 0;
+  text-align: left;
+}
+
+.character-name {
+  height: 45px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.stat-label {
+  color: #20b2aa;
+  letter-spacing: 5px;
+  width: 40px;
+  position: relative;
+}
+
+.stat-value {
+  letter-spacing: 0.8px;
+  padding: 0 5px;
+  text-align: right;
+  min-width: 70px;
+}
+
+.stat-value.level {
+  text-indent: 20px;
+}
+
+.status {
+  color: rgb(177, 4, 139);
+  letter-spacing: 0;
+  margin-left: -1px;
+  font-size: 12px;
+}
+
+.bar-container {
+  position: relative;
+  height: 20px;
+  padding: 5px 0;
+}
+
+.hp-bar {
+  height: 2px;
+  background: linear-gradient(to right, rgb(20, 102, 255) 60%, rgb(190, 213, 255));
+}
+
+.mp-bar {
+  height: 2px;
+  background: linear-gradient(to right, rgb(20, 226, 123) 60%, rgb(217, 226, 222));
+
+}
+
+.hp-bar-background,
+.mp-bar-background,
+.level-bar-background,
+.limit-bar-background {
+  height: 2px;
+  width: 145px;
+  background: rgb(65, 3, 3);
+}
+
+/* Levels Table */
+.character-levels-table {
+  position: absolute;
+  top: 50px;
+  left: 32px;
+  line-height: 28px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 12px;
+}
+
+.level-row,
+.limit-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 3px 0;
+}
+
+.level-bar {
+  height: 13px;
+  background: linear-gradient(
+    to bottom,
+    rgb(194, 130, 130) 20%,
+    rgb(255, 255, 255) 40%,
+    rgb(255, 170, 170) 60%,
+    rgb(255, 170, 170) 100%
+  );
+}
+
+.level-bar-background {
+  height: 13px;
+  width: 180px;
+  border: 3px solid;
+  background: linear-gradient(to bottom, rgb(46, 46, 46) 20%, rgb(116, 116, 116) 40%, rgb(116, 116, 116) 100%);
+  z-index: 1;
+}
+
+.limit-bar {
+  position: absolute;
+  left: 23px;
+  height: 13px;
+  background: linear-gradient(
+    to bottom,
+    rgb(158, 112, 138) 20%,
+    rgb(255, 255, 255) 40%,
+    rgb(229, 164, 201) 60%,
+    rgb(229, 164, 201) 100%
+  );
+  z-index: 2;
+}
+
+.limit-bar-fury {
+  position: absolute;
+  left: 23px;
+  height: 13px;
+  background: linear-gradient(
+    to bottom,
+    rgb(152, 54, 52) 20%,
+    rgb(255, 255, 255) 40%,
+    rgb(211, 123, 124) 60%,
+    rgb(211, 123, 124) 100%
+  );
+  z-index: 2;
+}
+
+.limit-bar-sadness {
+  position: absolute;
+  left: 23px;
+  height: 13px;
+  background: linear-gradient(
+    to bottom,
+    rgb(56, 54, 159) 20%,
+    rgb(255, 255, 255) 40%,
+    rgb(124, 124, 219) 60%,
+    rgb(124, 124, 219) 100%
+  );
+  z-index: 2;
+}
+
+.limit-bar-break {
+  position: absolute;
+  left: 23px;
+  height: 13px;
+  animation: rainbow 0.3s linear infinite;
+  z-index: 2;
+}
+
+.limit-bar-background {
+  position: absolute;
+  left: 20px;
+  height: 13px;
+  width: 180px;
+  border: 3px solid;
+  background: linear-gradient(to bottom, rgb(46, 46, 46) 20%, rgb(116, 116, 116) 40%, rgb(116, 116, 116) 100%);
+  z-index: 1;
+}
+
+/* Menu Sidebar */
+.ff7-aside {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  z-index: 3;
+}
+
+.ff7-menu {
+  position: relative;
+  list-style: none;
+  padding: 10px 0 10px 40px;
+  width: 250px; 
+  border: 5px solid;
+  border-radius: 15px;
+  box-sizing: border-box;
+  animation: movingUp 0.5s ease;
+}
+
+.menu-item {
+  line-height: 40px;
+  padding: 0 10px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.menu-item.selected {
+  background: rgba(255, 255, 255, 0.1);
+  padding-left: 30px;
+}
+
+.menu-item.inactive {
+  color: grey;
+}
+
+.menu-item.active {
+  color: white;
+}
+
+/* Controls */
+.ff7-controls {
+  margin-top: 40px;
+  gap: 20px;
+  align-items: center;
+}
+
+.ff7-music {
+  width: 150px;
+  height: 30px;
+  animation: falling 1s linear 2s forwards;
+  opacity: 0;
+  z-index: 0;
+}
+
+.ff7-brand {
+  font-size: 10px;
+  font-weight: bold;
+  color: black;
+  animation: hanging 2s linear 3s forwards;
+  opacity: 0;
+  z-index: -1;
+}
+
+.ff7-cursor {
+  position: absolute;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.ff7-cursor img {
+  width: 50px;
+  height: auto;
+  display: block;
+}
+
+.ff7-cursor.left {
+  top: 300px;
+  left: 20px;
+}
+
+.ff7-cursor.right {
+  top: 300px;
+  right: 20px;
+}
+
+.ff7-instructions {
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+  animation: appearing2 1s linear 6s forwards;
+  z-index: -1;
+  max-width: 300px;
+}
+
+
+.ff7-time {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 250px;
+  border: 5px solid;
+  border-radius: 15px;
+  box-sizing: border-box;
+  animation: movingRight 0.5s ease;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 38px;
+}
+
+.ff7-time > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time-value,
+.gil-value {
+  position: absolute;
+  right: 20px;
+  text-align: right;
+  min-width: 150px;
+}
+
+/* Animations */
+@keyframes appearing {
+  0% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  50% {
+    color: white;
+    text-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white, 0 0 20px white, 0 0 25px white;
+  }
+  100% {
+    color: white;
+    opacity: 1;
+  }
+}
+
+@keyframes appearing2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes movingUp {
+  from {
+    transform: translateY(3900px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes movingDown {
+  from {
+    transform: translateY(-8000px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes movingLeft {
+  from {
+    transform: translateX(18500px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes movingRight {
+  from {
+    transform: translateX(-18000px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes falling {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(91px);
+  }
+  56% {
+    transform: translateY(109px);
+  }
+  74% {
+    transform: translateY(123px);
+  }
+  86% {
+    transform: translateY(133px);
+  }
+  98% {
+    transform: translateY(140px);
+  }
+  10%,
+  44%,
+  64%,
+  80%,
+  92%,
+  100% {
+    transform: translateY(145px);
+  }
+}
+
+@keyframes hanging {
+  0% {
+    transform: translate(0, 0);
+    color: white;
+  }
+  10% {
+    transform: rotate(1deg) translate(-4px, 105px);
+  }
+  13% {
+    transform: rotate(2deg) translate(-8px, 145px);
+  }
+  15% {
+    transform: rotate(2deg) translate(-10px, 125px);
+  }
+  22% {
+    transform: rotate(5deg) translate(-20px, 145px);
+  }
+  38% {
+    transform: rotate(-4deg) translate(15px, 145px);
+  }
+  55% {
+    transform: rotate(2deg) translate(-5px, 145px);
+  }
+  65% {
+    transform: rotate(-1deg) translate(2px, 145px);
+  }
+  80% {
+    transform: rotate(0deg) translate(-1px, 145px);
+  }
+  8%,
+  100% {
+    transform: translate(0, 145px);
+    color: white;
+  }
+}
+
+@keyframes screenTransition {
+  0%,
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    background: linear-gradient(
+      to bottom,
+      rgb(152, 99, 51) 20%,
+      rgb(255, 255, 255) 40%,
+      rgb(192, 151, 117) 60%,
+      rgb(192, 151, 117) 100%
+    );
+  }
+  16.66% {
+    background: linear-gradient(
+      to bottom,
+      rgb(139, 140, 54) 20%,
+      rgb(255, 255, 255) 40%,
+      rgb(216, 209, 128) 60%,
+      rgb(216, 209, 128) 100%
+    );
+  }
+  33.32% {
+    background: linear-gradient(
+      to bottom,
+      rgb(94, 134, 65) 20%,
+      rgb(255, 255, 255) 40%,
+      rgb(159, 189, 123) 60%,
+      rgb(159, 189, 123) 100%
+    );
+  }
+  49.98% {
+    background: linear-gradient(
+      to bottom,
+      rgb(49, 138, 147) 20%,
+      rgb(255, 255, 255) 40%,
+      rgb(114, 191, 201) 60%,
+      rgb(114, 191, 201) 100%
+    );
+  }
+  66.64% {
+    background: linear-gradient(
+      to bottom,
+      rgb(50, 53, 131) 20%,
+      rgb(255, 255, 255) 40%,
+      rgb(122, 123, 205) 60%,
+      rgb(122, 123, 205) 100%
+    );
+  }
+  83.3% {
+    background: linear-gradient(
+      to bottom,
+      rgb(142, 66, 140) 20%,
+      rgb(255, 255, 255) 40%,
+      rgb(211, 137, 210) 60%,
+      rgb(211, 137, 210) 100%
+    );
+  }
+  100% {
+    background: linear-gradient(
+      to bottom,
+      rgb(148, 56, 51) 20%,
+      rgb(255, 255, 255) 40%,
+      rgb(193, 125, 120) 60%,
+      rgb(193, 125, 120) 100%
+    );
+  }
+}
+
+@media (max-width: 1024px) {
+  .ff7-section {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .ff7-main-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .ff7-aside {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-top: 20px;
+  }
+}
