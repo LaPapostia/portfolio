@@ -1,0 +1,7 @@
+Publish React/Vite - AWS Amplify
+
+1. Creation of the account (can be on the free edition)
+2. Enter the dashboard console and find the 'AWS Aplify' service
+3. (Optional) Create an 'amplify.yml' with the deploy commands and props
+4. Create an Amplify App in base of a Github repository
+5. Deploy and post-configure the application
