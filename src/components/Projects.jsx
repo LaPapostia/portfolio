@@ -23,14 +23,14 @@ function ProjectsMenu() {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const skills = [
-    { name: ".NET", icon: <SiDotnet />, level: 95 },
-    { name: "React", icon: <FaReact />, level: 90 },
-    { name: "Node.js", icon: <FaNodeJs />, level: 85 },
-    { name: "TypeScript", icon: <SiTypescript />, level: 80 },
-    { name: "Python", icon: <FaPython />, level: 75 },
-    { name: "SQL/DB", icon: <FaDatabase />, level: 85 },
-    { name: "Azure - Azure DevOps", icon: <VscAzureDevops />, level: 60 },
-    { name: "GitHub - Github Actions", icon: <FaGithub />, level: 80 },
+    { name: ".NET", icon: <SiDotnet />, level: "Junior" },
+    { name: "React", icon: <FaReact />, level: "Junior" },
+    { name: "Node.js", icon: <FaNodeJs />, level: "Junior" },
+    { name: "TypeScript", icon: <SiTypescript />, level: "Junior" },
+    { name: "Python", icon: <FaPython />, level: "Junior" },
+    { name: "SQL/DB", icon: <FaDatabase />, level: "Junior" },
+    { name: "Azure - Azure DevOps", icon: <VscAzureDevops />, level: "Junior" },
+    { name: "GitHub - Github Actions", icon: <FaGithub />, level: "Junior" },
   ];
 
   const projects = [
@@ -140,14 +140,15 @@ function ProjectsMenu() {
 
   return (
     <section
-      className="relative flex flex-col md:flex-row min-h-screen 
-      bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 
-	  transition-colors duration-700 text-white px-6 py-40"
+      className="flex flex-col items-center justify-center md:flex-row min-h-screen
+            bg-gradient-to-b from-gray-50 to-gray-200 dark:from-gray-900 dark:to-gray-800 
+            px-6 transition-colors duration-700 pb-10 pt-10"
     >
+
 
       {/* Botón Menu Habilidades*/}
       <motion.button
-        onClick={() => { setIsMenuOpen(!isMenuOpen); setShowButton(false); }}
+        onClick={() => { setIsMenuOpen(!isMenuOpen); setShowButton(false); playItemChange(); }}
         animate={{ opacity: showButton ? 1 : 0, y: showButton ? 0 : -10 }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
         className="
@@ -164,15 +165,16 @@ function ProjectsMenu() {
       >
         {isMenuOpen ? "Cerrar" : "Habilidades"}
       </motion.button>
-      <div className="relative w-full h-screen overflow-hidden" id="projects">
+
+      <div className="relative w-full min-h-screen " id="projects">
 
         {/* === Menú lateral  === */}
         <motion.aside
-          initial={{ x: -260 }}
-          animate={{ x: isMenuOpen ? 0 : -260 }}
+          initial={{ x: -400 }}
+          animate={{ x: isMenuOpen ? 0 : -400 }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
           className="
-      fixed top-0 left-0 h-full w-64 z-40
+      fixed top-0 left-0 h-full w-80 z-40
       bg-gray-900 border-r border-cyan-800
       overflow-y-auto
     "
@@ -198,26 +200,28 @@ function ProjectsMenu() {
                     }
             `}
                 >
-                  <div className="text-cyan-400 text-xl">{skill.icon}</div>
+                  <div className="text-cyan-400 text-xl mr-2">{skill.icon}</div>
                   <div className="flex-1">
                     <div className="flex justify-between text-sm font-medium">
                       <span>{skill.name}</span>
-                      <span>{skill.level}%</span>
+
                     </div>
-                    <div className="w-full bg-gray-700/50 h-1.5 rounded-full mt-1">
+                    <div className="w-full  mt-1">
+                      <span>Nivel: {skill.level}</span></div>
+                    {/* <div className="w-full bg-gray-700/50 h-1.5 rounded-full mt-1">
                       <motion.div
                         className="bg-cyan-500 h-1.5 rounded-full"
                         initial={{ width: 0 }}
                         animate={{ width: `${skill.level}%` }}
                         transition={{ duration: 1 }}
                       />
-                    </div>
+                    </div> */}
                   </div>
                 </motion.li>
               ))}
 
               <button
-                onClick={() => { setIsMenuOpen(false); }}
+                onClick={() => { setIsMenuOpen(false); playItemChange(); }}
                 className="mt-6 w-full bg-cyan-800 hover:bg-cyan-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 cursor-pointer "
               >
                 Cerrar
@@ -234,17 +238,19 @@ function ProjectsMenu() {
             <h2 className="text-3xl font-bold text-cyan-800 dark:text-white mb-2">
               {selectedSkill ? `Proyectos con ${selectedSkill}` : "Proyectos Destacados"}
             </h2>
-            <h3 className="text-1xl  text-cyan-800 dark:text-white mb-12">
-              (Filtra por habilidad usando el boton de Habilidades)
+            <h3 className="text-1xl text-cyan-800 dark:text-white mb-12">
+              (Filtra por habilidad usando el botón de Habilidades)
             </h3>
 
-            {/* Desktop Carrusel */}
-            <div className="md:flex items-center gap-2 relative justify-center w-full h-[70vh]">
-
+            {/* === Desktop Carrusel === */}
+            <div className="hidden md:flex items-center gap-2 relative justify-center w-full h-[70vh]">
               {canSlide && (
                 <button
-                  onClick={() => { prev(); playItemChange(); }}
-                  className="px-4 py-16 bg-cyan-700/80 hover:bg-cyan-600 text-white rounded-2xl shadow-lg transition-all cursor-pointer"
+                  onClick={() => {
+                    prev();
+                    playItemChange();
+                  }}
+                  className="px-4 py-16 bg-cyan-700/80 hover:bg-cyan-600 text-white rounded-2xl shadow-lg transition-all cursor-pointer mr-10"
                 >
                   ‹
                 </button>
@@ -253,10 +259,15 @@ function ProjectsMenu() {
               <div className="overflow-hidden w-200 h-full transition-all duration-500">
                 <div
                   className="flex transition-transform duration-500 h-full"
-                  style={{ transform: `translateX(-${currentIndex * (100 / maxVisible)}%)` }}
+                  style={{
+                    transform: `translateX(-${currentIndex * (100 / maxVisible)}%)`,
+                  }}
                 >
                   {filteredProjects.map((project, index) => (
-                    <div key={index} className="w-1/3 flex-shrink-0 flex justify-center h-full">
+                    <div
+                      key={index}
+                      className="w-1/3 flex-shrink-0 flex justify-center h-full"
+                    >
                       <ProjectCard project={project} index={index} fullHeight />
                     </div>
                   ))}
@@ -265,25 +276,28 @@ function ProjectsMenu() {
 
               {canSlide && (
                 <button
-                  onClick={() => { next(); playItemChange(); }}
-              className="px-4 py-16 bg-cyan-700/80 hover:bg-cyan-600 text-white rounded-2xl shadow-lg transition-all cursor-pointer"
+                  onClick={() => {
+                    next();
+                    playItemChange();
+                  }}
+                  className="px-4 py-16 bg-cyan-700/80 hover:bg-cyan-600 text-white rounded-2xl shadow-lg transition-all cursor-pointer ml-10"
                 >
-              ›
-            </button>
+                  ›
+                </button>
               )}
-          </div>
+            </div>
 
-          {/* Mobile: grid normal */}
-          <div className="grid grid-cols-1 gap-6 justify-items-center md:hidden">
-            {filteredProjects.map((project, index) => (
-              <ProjectCard key={index} project={project} index={index} />
-            ))}
-          </div>
+            {/* === Mobile: vista normal (sin carrusel) === */}
+            <div className="grid grid-cols-1 gap-6 justify-items-center md:hidden">
+              {filteredProjects.map((project, index) => (
+                <ProjectCard key={index} project={project} index={index} />
+              ))}
+            </div>
 
+          </div>
         </div>
-      </div>
 
-    </div>
+      </div>
 
     </section >
   );

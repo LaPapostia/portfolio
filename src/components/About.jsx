@@ -26,7 +26,7 @@ const About = () => {
                     trabajo como desarrollador <span className="text-cyan-700 font-bold">Full Stack</span> apasionado por
                     crear soluciones tecnológicas que combinen funcionalidad, rendimiento y una excelente
                     experiencia de usuario. <br />
-                    Disfruto de proveer soluciones innovadoras y eficientes que impulsen el éxito de los proyectos en 
+                    Disfruto de proveer soluciones innovadoras y eficientes que impulsen el éxito de los proyectos en
                     los que participo.
                 </p>
 

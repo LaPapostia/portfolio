@@ -2,7 +2,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import useDarkMode from "@/hooks/useDarkMode";
 import RevealOnScroll from "@/components/common/RevealOnScroll";
-import { FaRegSun, FaRegMoon } from "react-icons/fa";
+import { FaMoon } from "react-icons/fa";
+import { MdSunny } from "react-icons/md";
 import { FaHome, FaUser, FaCode, FaBars, FaTimes, FaSignOutAlt } from "react-icons/fa";
 import useSound from 'use-sound';
 
@@ -13,6 +14,7 @@ function Hero() {
   const [totalPlayed, setTotalPlayed] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false);
   const [splashVisible, setSplashVisible] = useState(true);
+ const [showGif, setShowGif] = useState(false);
 
   // Menu items
   const menuItems = [
@@ -22,10 +24,18 @@ function Hero() {
     { label: "Salir", href: "#contact", icon: <FaSignOutAlt /> },
   ];
 
-  // Handle start from splash screen
   const handleStart = () => {
+    // 2️⃣ Muestra el mini GIF al mismo tiempo
+    setShowGif(true);
     playItemChange();
-    setSplashVisible(false);
+    // 3️⃣ Oculta el splash con un leve delay (para ver el efecto)
+    setTimeout(() => {
+      setSplashVisible(false);
+      // 4️⃣ Cuando termine la animación, cierra todo
+      setTimeout(() => {
+        setShowGif(false);
+      }, 1500); // tiempo total del efecto
+    }, 300);
   };
 
   // Start game on any key press
@@ -94,21 +104,43 @@ function Hero() {
   }
 
 
+
+
   if (splashVisible) {
     return (
       <AnimatePresence>
         {splashVisible && (
-          <motion.div
-            initial={false}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
-            className="fixed inset-0 flex flex-col items-center justify-center bg-black text-white 
-          text-3xl select-none cursor-pointer z-[9999]"
-            onClick={handleStart}
-          >
-            <p className="animate-pulse">Presiona cualquier botón para iniciar</p>
-          </motion.div>
+          <>
+            {/* === Splash principal === */}
+            <motion.div
+              key="splash"
+              initial={false}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.7, ease: "easeInOut" }}
+              className="fixed inset-0 flex flex-col items-center justify-center bg-black text-white 
+              text-3xl select-none cursor-pointer z-[9999]"
+              onClick={handleStart}
+            >
+              <p className="animate-pulse">Presiona cualquier botón para iniciar</p>
+            </motion.div>
+
+            {/* === GIF/Animación final === */}
+            <AnimatePresence>
+              {showGif && (
+                <motion.img
+                  key="mako-gif"
+                  src="/assets/mako_spark.gif"
+                  alt="Mako energy"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.6 }}
+                  transition={{ duration: 1, ease: "easeInOut" }}
+                  className="fixed bottom-10 right-10 w-32 h-32 object-contain z-[10001] pointer-events-none"
+                />
+              )}
+            </AnimatePresence>
+          </>
         )}
       </AnimatePresence>
     );
@@ -143,7 +175,7 @@ function Hero() {
         "
         aria-label="Cambiar modo oscuro"
       >
-        {darkMode ? <FaRegSun className="text-cyan-900 text-3xl" /> : <FaRegMoon className="text-white text-3xl" />}
+        {darkMode ? <MdSunny className="text-cyan-900 text-3xl" /> : <FaMoon className="text-white text-3xl" />}
       </motion.button>
 
       {/* Estadísticas estilo FFVII */}
