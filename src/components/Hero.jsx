@@ -7,6 +7,11 @@ import { MdSunny } from "react-icons/md";
 import { FaHome, FaUser, FaCode, FaBars, FaTimes, FaSignOutAlt } from "react-icons/fa";
 import useSound from 'use-sound';
 
+import { useTranslation } from "react-i18next";
+import "@/hooks/i18n";
+
+import { GrLanguage } from "react-icons/gr";
+
 function Hero() {
   const [darkMode, setDarkMode] = useDarkMode();
   const [showButton, setShowButton] = useState(true);
@@ -14,14 +19,16 @@ function Hero() {
   const [totalPlayed, setTotalPlayed] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false);
   const [splashVisible, setSplashVisible] = useState(true);
- const [showGif, setShowGif] = useState(false);
+  const [showGif, setShowGif] = useState(false);
+
+  const { t, i18n } = useTranslation();
 
   // Menu items
   const menuItems = [
-    { label: "Inicio", href: "#hero", icon: <FaHome /> },
-    { label: "Sobre mí", href: "#about", icon: <FaUser /> },
-    { label: "Proyectos", href: "#projects", icon: <FaCode /> },
-    { label: "Salir", href: "#contact", icon: <FaSignOutAlt /> },
+    { label: t("menu.home"), href: "#hero", icon: <FaHome /> },
+    { label: t("menu.about"), href: "#about", icon: <FaUser /> },
+    { label: t("menu.projects"), href: "#projects", icon: <FaCode /> },
+    { label: t("menu.exit"), href: "#contact", icon: <FaSignOutAlt /> },
   ];
 
   const handleStart = () => {
@@ -104,7 +111,12 @@ function Hero() {
   }
 
 
-
+  const changeLanguage = () => {
+    debugger
+    const newLang = t.lng === "es" ? "en" : "es";
+    i18n.changeLanguage(newLang);
+    localStorage.setItem("lang", newLang);
+  };
 
   if (splashVisible) {
     return (
@@ -122,7 +134,7 @@ function Hero() {
               text-3xl select-none cursor-pointer z-[9999]"
               onClick={handleStart}
             >
-              <p className="animate-pulse">Presiona cualquier botón para iniciar</p>
+              <p className="animate-pulse">{t("start")}</p>
             </motion.div>
 
             {/* === GIF/Animación final === */}
@@ -145,6 +157,7 @@ function Hero() {
       </AnimatePresence>
     );
   }
+
   return (
     <section
       id="hero"
@@ -178,6 +191,32 @@ function Hero() {
         {darkMode ? <MdSunny className="text-cyan-900 text-3xl" /> : <FaMoon className="text-white text-3xl" />}
       </motion.button>
 
+      {/* Botón Cambiar Idioma */}
+      <motion.button
+        onClick={() => { changeLanguage(); playItemSelected() }}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{
+          opacity: showButton ? 1 : 0,
+          y: showButton ? 0 : -20,
+        }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
+        className="
+          fixed 
+          right-4 
+          top-48 md:top-28
+          bg-cyan-900 dark:bg-white 
+          p-2 rounded-full shadow 
+          hover:scale-105 
+          transition-transform duration-300
+          z-50
+          cursor-pointer
+        "
+        aria-label="Cambiar Idioma"
+      >
+        <GrLanguage className="text-white dark:text-cyan-800 text-3xl" />
+      </motion.button>
+
+
       {/* Estadísticas estilo FFVII */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
@@ -190,7 +229,7 @@ function Hero() {
         time-ff7 
             fixed 
             right-4
-            top-48 md:top-28
+            top-66 md:top-42
             text-right
             dark:text-cyan-900 text-white
             bg-cyan-900 dark:bg-white 
@@ -203,10 +242,10 @@ function Hero() {
           "
       >
         <div>
-          Time: <span className="tracking-wider">{formatTime(totalPlayed)}</span>
+          {t("time")}<span className="tracking-wider">{formatTime(totalPlayed)}</span>
         </div>
         <div>
-          Guiles: <span className="tracking-wider">{formatGil(777)}G</span>
+          {t("guils")}<span className="tracking-wider">{formatGil(777)}G</span>
         </div>
       </motion.div>
 
@@ -268,7 +307,7 @@ function Hero() {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="text-2xl md:text-3xl font-light text-cyan-800 dark:text-gray-300 mt-3"
           >
-            Full Stack Developer
+            {t("title")}
           </RevealOnScroll>
         </div>
 
@@ -320,7 +359,7 @@ function Hero() {
         className="absolute bottom-8 flex flex-col items-center"
       >
         <span className="text-xs text-gray-600 dark:text-gray-400 mb-2">
-          Desliza hacia abajo
+          {t("scroll_down")}
         </span>
         <div className="w-1 h-3 bg-gray-600 dark:bg-gray-400 rounded-full animate-bounce"></div>
       </RevealOnScroll>

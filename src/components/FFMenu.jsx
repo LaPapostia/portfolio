@@ -6,7 +6,7 @@ import { MenuSidebar } from "@/components/ffvii/menu-sidebar"
 import { CHARACTER_FILES } from "@/assets/data/ff7-data"
 import "@/styles/ffvii.css"
 
-export default function FF7Menu() {
+export default function FF7Menu({ visible, onClose }) {
   const [currentFile, setCurrentFile] = useState(0)
   const [gameData, setGameData] = useState(CHARACTER_FILES[0])
   const [selectedMenu, setSelectedMenu] = useState(0)
@@ -85,10 +85,13 @@ export default function FF7Menu() {
     handleFileChange(newFile)
   }
 
+  if (visible == false) {
+    return (<></>)
+  }
   return (
     <div className="ff7-container 
           bg-gradient-to-b from-gray-50 to-gray-200 dark:from-gray-900 dark:to-gray-800 
-          px-6 transition-colors duration-700 ">
+          px-6 transition-colors duration-700 " >
 
       <div className="ff7-group " >
         <section>
@@ -105,9 +108,9 @@ export default function FF7Menu() {
           <audio ref={moveAudioRef} src="https://www.dropbox.com/s/fiyx4q2mdwynraj/FF7CursorMove.mp3?raw=1" />
           <audio ref={loadAudioRef} src="https://www.dropbox.com/s/v04ewrevpnnsz03/FF7CursorSaveLoad.mp3?raw=1" />
 
-          {/* <audio controls autoPlay loop >
+          <audio controls autoPlay loop >
             <source src={gameData.musicUrl} type="audio/mp3" />
-          </audio> */}
+          </audio>
 
           <button
             className={`ff7-cursor left `}
@@ -127,14 +130,14 @@ export default function FF7Menu() {
 
         </div>
 
-          <div className={`ff7-time bg-gradient-to-b from-cyan-700 to-black`}>
-            <div>
-              Time <span className="time-value">{formatTime(totalPlayed)}</span>
-            </div>
-            <div>
-              Gil <span className="gil-value">{formatGil(gameData.gil)}</span>
-            </div>
+        <div className={`ff7-time bg-gradient-to-b from-cyan-700 to-black`}>
+          <div>
+            Time <span className="time-value">{formatTime(totalPlayed)}</span>
           </div>
+          <div>
+            Gil <span className="gil-value">{formatGil(gameData.gil)}</span>
+          </div>
+        </div>
 
       </div>
     </div>

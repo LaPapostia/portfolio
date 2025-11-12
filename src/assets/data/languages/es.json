@@ -1,0 +1,68 @@
+{
+    "start": "Presiona cualquier botón para iniciar",
+    "time": "Tiempo: ",
+    "guils": "Guiles: ",
+    "title": "Desarrollador Full Stack",
+    "scroll_down": "Deslíza hacia abajo ",
+    "skills_text": "Habilidades",
+    "button_close": "Cerrar",
+    "projects_with": "Proyectos con ",
+    "featured_projects": "Proyectos Destacados",
+    "filter_projects_text": "(Filtra por habilidad usando el botón de Habilidades)",
+    "menu": {
+        "home": "Inicio",
+        "about": "Sobre mí",
+        "projects": "Proyectos",
+        "exit": "Salir"
+    },
+    "about": {
+        "title": "Sobre mí",
+        "intro": "Hola, me alegra que estés aquí,",
+        "name": "Me llamo <1>Juanes Sepúlveda</1>, trabajo como desarrollador <3>Full Stack</3> apasionado por crear soluciones tecnológicas que combinen funcionalidad, rendimiento y una excelente experiencia de usuario.",
+        "outro": "Disfruto de proveer soluciones innovadoras y eficientes que impulsen el éxito de los proyectos en los que participo."
+    },
+    "skills": {
+        ".NET": ".NET",
+        "React (Ts y Js)": "React (Ts y Js)",
+        "Node.js": "Node.js",
+        "Python": "Python",
+        "SQL": "SQL Server",
+        "Azure - Azure DevOps": "Azure - Azure DevOps",
+        "GitHub - GitHub Actions": "GitHub - GitHub Actions",
+        "Blazor": "Blazor",
+        "Docker": "Docker",
+        "AWS": "AWS",
+        "Mid": "Nv. Intermedio",
+        "Junior": "Nv. Junior"
+    },
+    "projects": [
+        {
+            "title": "Geocontrol",
+            "description": "Aplicativo para la gestión y monitoreo de rutas vehiculares en tiempo real."
+        },
+        {
+            "title": "App de Reportes",
+            "description": "ETL y visualización de datos para reportes ejecutivos de KPIs comerciales."
+        },
+        {
+            "title": "Sistema de Facturación e Inventarios",
+            "description": "Gestión completa de facturación y control de inventarios con integraciones a SAP, DIAN y ciclo CI/CD."
+        },
+        {
+            "title": "Sistemas de Inventarios y Pesajes",
+            "description": "Gestión completa de inventarios y revisión de canales para planta de beneficio, con integración a SAP y básculas."
+        },
+        {
+            "title": "Integración con SAP/4 Hana",
+            "description": "Integración avanzada con SAP/4 Hana para procesos contables y logísticos automatizados."
+        },
+        {
+            "title": "Integración con SAP Business One",
+            "description": "Conector completo para sincronización de datos entre sistemas internos y SAP Business One."
+        },
+        {
+            "title": "Facturación Electrónica",
+            "description": "Implementación de sistema de facturación electrónica con control de inventario y cumplimiento DIAN."
+        }
+    ]
+}

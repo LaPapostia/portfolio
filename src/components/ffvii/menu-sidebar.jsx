@@ -1,5 +1,3 @@
-"use client"
-
 const MENU_ITEMS = [
   { label: "Item", number: 0 },
   { label: "Magic", number: 1 },

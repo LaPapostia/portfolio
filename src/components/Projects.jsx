@@ -13,9 +13,11 @@ import { VscAzureDevops } from "react-icons/vsc";
 import { useState, useEffect } from "react";
 import ProjectCard from "@/components/common/ProjectCard";
 import useSound from 'use-sound';
-
+import { useTranslation, Trans } from "react-i18next";
+import "@/hooks/i18n";
 
 function ProjectsMenu() {
+  const { t } = useTranslation();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState(null);
@@ -24,30 +26,28 @@ function ProjectsMenu() {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const skills = [
-    { name: ".NET", icon: <SiDotnet />, level: "Mid" },
-    { name: "React (TypeScript y Javascript)", icon: <FaReact />, level: "Mid" },
-    { name: "Node.js", icon: <FaNodeJs />, level: "Mid" },
-    { name: "Python", icon: <FaPython />, level: "Mid" },
-    { name: "SQL/DB", icon: <FaDatabase />, level: "Mid" },
-    { name: "Azure - Azure DevOps", icon: <VscAzureDevops />, level: "Mid" },
-    { name: "GitHub - Github Actions", icon: <FaGithub />, level: "Mid" },
-    { name: "Blazor", icon: <SiBlazor />, level: "Junior" },
-    { name: "Docker", icon: <FaDocker />, level: "Junior" },
-    { name: "AWS", icon: <FaAws />, level: "Junior" },
-
+    { name: t("skills..NET"), icon: <SiDotnet />, level: t("skills.Mid") },
+    { name: t("skills.React (Ts y Js)"), icon: <FaReact />, level: t("skills.Mid") },
+    { name: t("skills.Node.js"), icon: <FaNodeJs />, level: t("skills.Mid") },
+    { name: t("skills.Python"), icon: <FaPython />, level: t("skills.Mid") },
+    { name: t("skills.SQL"), icon: <FaDatabase />, level: t("skills.Mid") },
+    { name: t("skills.Azure - Azure DevOps"), icon: <VscAzureDevops />, level: t("skills.Mid") },
+    { name: t("skills.GitHub - GitHub Actions"), icon: <FaGithub />, level: t("skills.Mid") },
+    { name: t("skills.Blazor"), icon: <SiBlazor />, level: t("skills.Junior") },
+    { name: t("skills.Docker"), icon: <FaDocker />, level: t("skills.Junior") },
+    { name: t("skills.AWS"), icon: <FaAws />, level: t("skills.Junior") }
   ];
 
-  const projects = [
 
+  const projects = [
     {
       principal: false,
-      title: "Geocontrol",
-      description:
-        "Aplicativo para la gestión y monitoreo de rutas vehiculares en tiempo real.",
-      image: "/images/cloud.png",
+      title: t("projects.0.title"),
+      description: t("projects.0.description"),
+      image: "/images/mako.png",
       link: "#",
       github: "#",
-      skills: ["Node.js", "React (TypeScript y Javascript)", ".NET", "SQL/DB", "GitHub - Github Actions", "Docker", "AWS"],
+      skills: ["Node.js", "React (Ts y Js)", ".NET", "SQL Server", "GitHub - GitHub Actions", "Docker", "AWS"],
       tech: [
         <FaNodeJs className="text-cyan-400" />,
         <FaReact className="text-cyan-400" />,
@@ -61,13 +61,12 @@ function ProjectsMenu() {
     },
     {
       principal: false,
-      title: "App de Reportes",
-      description:
-        "ETL y visualización de datos para reportes ejecutivos de KPIs comerciales.",
-      image: "/images/cloud.png",
+      title: t("projects.1.title"),
+      description: t("projects.1.description"),
+      image: "/images/mako.png",
       link: "#",
       github: "#",
-      skills: ["Python", "Azure DevOps", "SQL/DB", "GitHub - Github Actions", "Docker"],
+      skills: ["Python", "Azure - Azure DevOps", "SQL Server", "GitHub - GitHub Actions", "Docker"],
       tech: [
         <FaPython className="text-cyan-400" />,
         <VscAzureDevops className="text-cyan-400" />,
@@ -78,13 +77,12 @@ function ProjectsMenu() {
     },
     {
       principal: true,
-      title: "Sistema de Facturación e Inventarios",
-      description:
-        "Gestión completa de facturación y control de inventarios para canales distribuidos de venta, con integraciones a SAP, DIAN y ciclo CI/CD.",
-      image: "/images/cloud.png",
+      title: t("projects.2.title"),
+      description: t("projects.2.description"),
+      image: "/images/mako.png",
       link: "#",
       github: "#",
-      skills: [".NET", "SQL/DB", "Azure - Azure DevOps", "GitHub - Github Actions", "Blazor"],
+      skills: [".NET", "SQL Server", "Azure - Azure DevOps", "GitHub - GitHub Actions", "Blazor"],
       tech: [
         <SiDotnet className="text-cyan-400" />,
         <FaDatabase className="text-cyan-400" />,
@@ -95,66 +93,62 @@ function ProjectsMenu() {
     },
     {
       principal: true,
-      title: "Sistemas de Inventarios y Pesajes",
-      description:
-        "Gestión completa de inventarios y revisión de canales para sistema de planta de beneficio y sacrificio, con integración a SAP y con básculas.",
-      image: "/images/cloud.png",
+      title: t("projects.3.title"),
+      description: t("projects.3.description"),
+      image: "/images/mako.png",
       link: "#",
       github: "#",
-      skills: [".NET", "SQL/DB", "Azure - Azure DevOps", "GitHub - Github Actions"],
+      skills: [".NET", "SQL Server", "Azure - Azure DevOps", "GitHub - GitHub Actions"],
       tech: [
         <SiDotnet className="text-cyan-400" />,
         <FaDatabase className="text-cyan-400" />,
         <VscAzureDevops className="text-cyan-400" />,
-        <FaGithub className="text-cyan-400" />
+        <FaGithub className="text-cyan-400" />,
       ],
     },
     {
       principal: true,
-      title: "Sistemas de Integración con SAP/4 Hana",
-      description:
-        "Gestión completa de inventarios y revisión de canales para sistema de planta de beneficio y sacrificio, con integración a SAP y con básculas.",
-      image: "/images/cloud.png",
+      title: t("projects.4.title"),
+      description: t("projects.4.description"),
+      image: "/images/mako.png",
       link: "#",
       github: "#",
-      skills: [".NET", "SQL/DB", "Azure - Azure DevOps", "GitHub - Github Actions"],
+      skills: [".NET", "SQL Server", "Azure - Azure DevOps", "GitHub - GitHub Actions"],
       tech: [
         <SiDotnet className="text-cyan-400" />,
         <FaDatabase className="text-cyan-400" />,
         <VscAzureDevops className="text-cyan-400" />,
-        <FaGithub className="text-cyan-400" />
+        <FaGithub className="text-cyan-400" />,
       ],
     },
     {
       principal: true,
-      title: "Sistemas de Integración con SAP Business One",
-      description:
-        "Gestión completa de inventarios y revisión de canales para sistema de planta de beneficio y sacrificio, con integración a SAP y con básculas.",
-      image: "/images/cloud.png",
+      title: t("projects.5.title"),
+      description: t("projects.5.description"),
+      image: "/images/mako.png",
       link: "#",
       github: "#",
-      skills: [".NET", "SQL/DB", "Azure - Azure DevOps", "GitHub - Github Actions"],
+      skills: [".NET", "SQL Server", "Azure - Azure DevOps", "GitHub - GitHub Actions"],
       tech: [
         <SiDotnet className="text-cyan-400" />,
         <FaDatabase className="text-cyan-400" />,
         <VscAzureDevops className="text-cyan-400" />,
-        <FaGithub className="text-cyan-400" />
+        <FaGithub className="text-cyan-400" />,
       ],
     },
     {
       principal: true,
-      title: "Sistemas de Facturación Electrónica",
-      description:
-        "Gestión completa de inventarios y revisión de canales para sistema de planta de beneficio y sacrificio, con integración a SAP y con básculas.",
-      image: "/images/cloud.png",
+      title: t("projects.6.title"),
+      description: t("projects.6.description"),
+      image: "/images/mako.png",
       link: "#",
       github: "#",
-      skills: [".NET", "SQL/DB", "Azure - Azure DevOps", "GitHub - Github Actions"],
+      skills: [".NET", "SQL Server", "Azure - Azure DevOps", "GitHub - GitHub Actions"],
       tech: [
         <SiDotnet className="text-cyan-400" />,
         <FaDatabase className="text-cyan-400" />,
         <VscAzureDevops className="text-cyan-400" />,
-        <FaGithub className="text-cyan-400" />
+        <FaGithub className="text-cyan-400" />,
       ],
     },
   ];
@@ -223,7 +217,7 @@ function ProjectsMenu() {
           text-white dark:text-black cursor-pointer
         "
       >
-        {isMenuOpen ? "Cerrar" : "Habilidades"}
+        {isMenuOpen ? t("button_close") : t("skills_text")}
       </motion.button>
 
       <div className="relative w-full min-h-screen " id="projects">
@@ -242,7 +236,7 @@ function ProjectsMenu() {
           <div className="p-6 space-y-6">
 
             <h1 className="text-2xl font-bold text-cyan-400 mt-10">
-              Habilidades
+              {t("skills_text")}
             </h1>
 
             <ul className="space-y-2">
@@ -267,15 +261,7 @@ function ProjectsMenu() {
 
                     </div>
                     <div className="w-full  mt-1">
-                      <span>Nivel: {skill.level}</span></div>
-                    {/* <div className="w-full bg-gray-700/50 h-1.5 rounded-full mt-1">
-                      <motion.div
-                        className="bg-cyan-500 h-1.5 rounded-full"
-                        initial={{ width: 0 }}
-                        animate={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1 }}
-                      />
-                    </div> */}
+                      <span>{skill.level}</span></div>
                   </div>
                 </motion.li>
               ))}
@@ -284,7 +270,7 @@ function ProjectsMenu() {
                 onClick={() => { setIsMenuOpen(false); playItemChange(); }}
                 className="mt-6 w-full bg-cyan-800 hover:bg-cyan-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 cursor-pointer "
               >
-                Cerrar
+                {t("button_close")}
               </button>
             </ul>
 
@@ -296,10 +282,10 @@ function ProjectsMenu() {
           <div className="w-full text-center">
 
             <h2 className="text-3xl font-bold text-cyan-800 dark:text-white mb-2">
-              {selectedSkill ? `Proyectos con ${selectedSkill}` : "Proyectos Destacados"}
+              {selectedSkill ? `${t("projects_with")}${selectedSkill}` : t("featured_projects")}
             </h2>
             <h3 className="text-1xl text-cyan-800 dark:text-white mb-12">
-              (Filtra por habilidad usando el botón de Habilidades)
+              {t("filter_projects_text")}
             </h3>
 
             {/* === Desktop Carrusel === */}

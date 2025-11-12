@@ -1,0 +1,68 @@
+{
+    "start": "Press any button to start",
+    "time": "Time: ",
+    "guils": "Guils: ",
+    "title": "Full Stack Developer",
+    "scroll_down": "Scroll",
+    "skills_text": "Skills",
+    "button_close": "Close",
+    "projects_with": "Projects in ",
+    "featured_projects": "Featured Projects",
+    "filter_projects_text": "(Filter by skill on 'Skills' button)",
+    "menu": {
+        "home": "Home",
+        "about": "About",
+        "projects": "Projects",
+        "exit": "Exit"
+    },
+    "about": {
+        "title": "About me",
+        "intro": "Hi, I'm glad you're here,",
+        "name": "My name is <1>Juanes Sepúlveda</1>, I work as a <3>Full Stack</3> developer passionate about creating technological solutions that combine functionality, performance, and a great user experience.",
+        "outro": "I enjoy providing innovative and efficient solutions that drive the success of the projects I work on."
+    },
+    "skills": {
+        ".NET": ".NET",
+        "React (Ts y Js)": "React (Ts y Js)",
+        "Node.js": "Node.js",
+        "Python": "Python",
+        "SQL": "SQL Server",
+        "Azure - Azure DevOps": "Azure - Azure DevOps",
+        "GitHub - GitHub Actions": "GitHub - GitHub Actions",
+        "Blazor": "Blazor",
+        "Docker": "Docker",
+        "AWS": "AWS",
+        "Mid": "Lv. Intermediate",
+        "Junior": "Lv. Junior"
+    },
+    "projects": [
+        {
+            "title": "Geocontrol",
+            "description": "Application for real-time vehicle route management and monitoring."
+        },
+        {
+            "title": "Reporting App",
+            "description": "ETL and data visualization for executive commercial KPI reports."
+        },
+        {
+            "title": "Billing and Inventory System",
+            "description": "Full billing and inventory control management with SAP, DIAN, and CI/CD integration."
+        },
+        {
+            "title": "Inventory and Weighing Systems",
+            "description": "Complete management of inventories and weighing systems integrated with SAP."
+        },
+        {
+            "title": "SAP/4 Hana Integration Systems",
+            "description": "Advanced integration for SAP/4 Hana automating accounting and logistics processes."
+        },
+        {
+            "title": "SAP Business One Integration Systems",
+            "description": "Full connector for data synchronization between internal systems and SAP Business One."
+        },
+        {
+            "title": "Electronic Billing Systems",
+            "description": "Implementation of an electronic invoicing system with inventory tracking and DIAN compliance."
+        }
+    ]
+}

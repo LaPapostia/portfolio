@@ -1,9 +1,8 @@
 
-export default function Footer() {
+export default function Footer({ onClick }) {
   return (
-    <footer className="relative text-white">
-      
-       {/* Franja inferior en forma de trapecio */}
+    <footer className="relative text-white cursor-pointer" onClick={onClick}>
+      {/* Franja inferior en forma de trapecio */}
       <div className="relative bg-cyan-900 text-center py-4 font-semibold text-sm tracking-wide">
         {/* Trapecio superior */}
         <div
@@ -13,7 +12,7 @@ export default function Footer() {
           }}
         ></div>
       </div>
-     
+
     </footer>
   );
 }
