@@ -5,9 +5,10 @@ import {
   FaDatabase,
   FaPython,
   FaGithub,
-  FaExternalLinkAlt,
+  FaAws,
+  FaDocker
 } from "react-icons/fa";
-import { SiDotnet, SiTypescript } from "react-icons/si";
+import { SiDotnet, SiTypescript, SiBlazor } from "react-icons/si";
 import { VscAzureDevops } from "react-icons/vsc";
 import { useState, useEffect } from "react";
 import ProjectCard from "@/components/common/ProjectCard";
@@ -23,14 +24,17 @@ function ProjectsMenu() {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const skills = [
-    { name: ".NET", icon: <SiDotnet />, level: "Junior" },
-    { name: "React", icon: <FaReact />, level: "Junior" },
-    { name: "Node.js", icon: <FaNodeJs />, level: "Junior" },
-    { name: "TypeScript", icon: <SiTypescript />, level: "Junior" },
-    { name: "Python", icon: <FaPython />, level: "Junior" },
-    { name: "SQL/DB", icon: <FaDatabase />, level: "Junior" },
-    { name: "Azure - Azure DevOps", icon: <VscAzureDevops />, level: "Junior" },
-    { name: "GitHub - Github Actions", icon: <FaGithub />, level: "Junior" },
+    { name: ".NET", icon: <SiDotnet />, level: "Mid" },
+    { name: "React (TypeScript y Javascript)", icon: <FaReact />, level: "Mid" },
+    { name: "Node.js", icon: <FaNodeJs />, level: "Mid" },
+    { name: "Python", icon: <FaPython />, level: "Mid" },
+    { name: "SQL/DB", icon: <FaDatabase />, level: "Mid" },
+    { name: "Azure - Azure DevOps", icon: <VscAzureDevops />, level: "Mid" },
+    { name: "GitHub - Github Actions", icon: <FaGithub />, level: "Mid" },
+    { name: "Blazor", icon: <SiBlazor />, level: "Junior" },
+    { name: "Docker", icon: <FaDocker />, level: "Junior" },
+    { name: "AWS", icon: <FaAws />, level: "Junior" },
+
   ];
 
   const projects = [
@@ -43,14 +47,16 @@ function ProjectsMenu() {
       image: "/images/cloud.png",
       link: "#",
       github: "#",
-      skills: ["Node.js", "React", "TypeScript", ".NET", "SQL/DB", "GitHub - Github Actions"],
+      skills: ["Node.js", "React (TypeScript y Javascript)", ".NET", "SQL/DB", "GitHub - Github Actions", "Docker", "AWS"],
       tech: [
         <FaNodeJs className="text-cyan-400" />,
         <FaReact className="text-cyan-400" />,
         <SiTypescript className="text-cyan-400" />,
         <SiDotnet className="text-cyan-400" />,
         <FaDatabase className="text-cyan-400" />,
+        <FaDocker className="text-cyan-400" />,
         <FaGithub className="text-cyan-400" />,
+        <FaAws className="text-cyan-400" />
       ],
     },
     {
@@ -61,19 +67,37 @@ function ProjectsMenu() {
       image: "/images/cloud.png",
       link: "#",
       github: "#",
-      skills: ["Python", "Azure DevOps", "SQL/DB", "GitHub - Github Actions"],
+      skills: ["Python", "Azure DevOps", "SQL/DB", "GitHub - Github Actions", "Docker"],
       tech: [
         <FaPython className="text-cyan-400" />,
         <VscAzureDevops className="text-cyan-400" />,
         <FaDatabase className="text-cyan-400" />,
         <FaGithub className="text-cyan-400" />,
+        <FaDocker className="text-cyan-400" />,
       ],
     },
     {
       principal: true,
       title: "Sistema de Facturación e Inventarios",
       description:
-        "Gestión completa de facturación y control de inventarios para canales distribuidos de venta, con integraciones en la nube y ciclo CI/CD.",
+        "Gestión completa de facturación y control de inventarios para canales distribuidos de venta, con integraciones a SAP, DIAN y ciclo CI/CD.",
+      image: "/images/cloud.png",
+      link: "#",
+      github: "#",
+      skills: [".NET", "SQL/DB", "Azure - Azure DevOps", "GitHub - Github Actions", "Blazor"],
+      tech: [
+        <SiDotnet className="text-cyan-400" />,
+        <FaDatabase className="text-cyan-400" />,
+        <VscAzureDevops className="text-cyan-400" />,
+        <FaGithub className="text-cyan-400" />,
+        <SiBlazor className="text-cyan-400" />,
+      ],
+    },
+    {
+      principal: true,
+      title: "Sistemas de Inventarios y Pesajes",
+      description:
+        "Gestión completa de inventarios y revisión de canales para sistema de planta de beneficio y sacrificio, con integración a SAP y con básculas.",
       image: "/images/cloud.png",
       link: "#",
       github: "#",
@@ -82,19 +106,55 @@ function ProjectsMenu() {
         <SiDotnet className="text-cyan-400" />,
         <FaDatabase className="text-cyan-400" />,
         <VscAzureDevops className="text-cyan-400" />,
-        <FaGithub className="text-cyan-400" />,
+        <FaGithub className="text-cyan-400" />
       ],
-    }, {
+    },
+    {
       principal: true,
-      title: "TEST PROJECT",
+      title: "Sistemas de Integración con SAP/4 Hana",
       description:
-        "TESSSSSSSSSSSSSSSSSST",
+        "Gestión completa de inventarios y revisión de canales para sistema de planta de beneficio y sacrificio, con integración a SAP y con básculas.",
       image: "/images/cloud.png",
       link: "#",
       github: "#",
       skills: [".NET", "SQL/DB", "Azure - Azure DevOps", "GitHub - Github Actions"],
       tech: [
         <SiDotnet className="text-cyan-400" />,
+        <FaDatabase className="text-cyan-400" />,
+        <VscAzureDevops className="text-cyan-400" />,
+        <FaGithub className="text-cyan-400" />
+      ],
+    },
+    {
+      principal: true,
+      title: "Sistemas de Integración con SAP Business One",
+      description:
+        "Gestión completa de inventarios y revisión de canales para sistema de planta de beneficio y sacrificio, con integración a SAP y con básculas.",
+      image: "/images/cloud.png",
+      link: "#",
+      github: "#",
+      skills: [".NET", "SQL/DB", "Azure - Azure DevOps", "GitHub - Github Actions"],
+      tech: [
+        <SiDotnet className="text-cyan-400" />,
+        <FaDatabase className="text-cyan-400" />,
+        <VscAzureDevops className="text-cyan-400" />,
+        <FaGithub className="text-cyan-400" />
+      ],
+    },
+    {
+      principal: true,
+      title: "Sistemas de Facturación Electrónica",
+      description:
+        "Gestión completa de inventarios y revisión de canales para sistema de planta de beneficio y sacrificio, con integración a SAP y con básculas.",
+      image: "/images/cloud.png",
+      link: "#",
+      github: "#",
+      skills: [".NET", "SQL/DB", "Azure - Azure DevOps", "GitHub - Github Actions"],
+      tech: [
+        <SiDotnet className="text-cyan-400" />,
+        <FaDatabase className="text-cyan-400" />,
+        <VscAzureDevops className="text-cyan-400" />,
+        <FaGithub className="text-cyan-400" />
       ],
     },
   ];
