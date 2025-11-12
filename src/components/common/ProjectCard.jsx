@@ -61,7 +61,7 @@ export default function ProjectCard({ project, index }) {
           {project.description}
         </p>
 
-        <div className="flex gap-4 mt-auto">
+        <div className="flex gap-4 mb-30">
           <a
             href={project.github}
             target="_blank"

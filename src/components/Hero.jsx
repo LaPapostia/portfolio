@@ -112,7 +112,6 @@ function Hero() {
 
 
   const changeLanguage = () => {
-    debugger
     const newLang = t.lng === "es" ? "en" : "es";
     i18n.changeLanguage(newLang);
     localStorage.setItem("lang", newLang);
