@@ -45,7 +45,8 @@ const About = () => {
           transition={{ delay: 0.4, duration: 0.6 }}
         >
           <a
-            href="https://github.com/tuusuario"
+            href="https://github.com/LaPapostia"
+
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-700 dark:text-gray-300 hover:text-indigo-500 text-3xl transition-transform transform hover:scale-110"
@@ -53,7 +54,7 @@ const About = () => {
             <FaGithub />
           </a>
           <a
-            href="https://linkedin.com/in/tu-perfil"
+            href="https://www.linkedin.com/in/juan-esteban-sep%C3%BAlveda-arboleda-432836217/"D
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-700 dark:text-gray-300 hover:text-indigo-500 text-3xl transition-transform transform hover:scale-110"
